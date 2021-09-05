@@ -1,0 +1,203 @@
+SQL> create table timetable(day varchar2(12),class varchar2(20),section varchar2(3),starttime varchar2(5),endtime varchar2(5),worktobedone varchar2(100),workleft varchar2(100),primary key(class,section,starttime,endtime));
+
+Table created.
+
+SQL> insert into timetable values('&day','&class','&section','&starttime','&endtime','&worktobedone','&workleft');
+Enter value for day: Monday
+Enter value for class: 8
+Enter value for section: B
+Enter value for starttime: 8:30
+Enter value for endtime: 10:20
+Enter value for worktobedone: Revision
+Enter value for workleft: 
+old   1: insert into timetable values('&day','&class','&section','&starttime','&endtime','&worktobedone','&workleft')
+new   1: insert into timetable values('Monday','8','B','8:30','10:20','Revision','')
+
+1 row created.
+
+SQL> /
+Enter value for day: Tuesday
+Enter value for class: 3
+Enter value for section: D
+Enter value for starttime: 12:23
+Enter value for endtime: 13:32
+Enter value for worktobedone: 
+Enter value for workleft: 
+old   1: insert into timetable values('&day','&class','&section','&starttime','&endtime','&worktobedone','&workleft')
+new   1: insert into timetable values('Tuesday','3','D','12:23','13:32','','')
+
+1 row created.
+
+SQL> /
+Enter value for day: Monday
+Enter value for class: 6
+Enter value for section: F
+Enter value for starttime: 15:30
+Enter value for endtime: 16:40
+Enter value for worktobedone: 
+Enter value for workleft: 
+old   1: insert into timetable values('&day','&class','&section','&starttime','&endtime','&worktobedone','&workleft')
+new   1: insert into timetable values('Monday','6','F','15:30','16:40','','')
+
+1 row created.
+
+SQL> select * from timetable;
+
+DAY          CLASS                SEC START ENDTI                               
+------------ -------------------- --- ----- -----                               
+WORKTOBEDONE                                                                    
+--------------------------------------------------------------------------------
+WORKLEFT                                                                        
+--------------------------------------------------------------------------------
+Monday       8                    B   8:30  10:20                               
+Revision                                                                        
+                                                                                
+                                                                                
+Tuesday      3                    D   12:23 13:32                               
+                                                                                
+                                                                                
+
+DAY          CLASS                SEC START ENDTI                               
+------------ -------------------- --- ----- -----                               
+WORKTOBEDONE                                                                    
+--------------------------------------------------------------------------------
+WORKLEFT                                                                        
+--------------------------------------------------------------------------------
+                                                                                
+Monday       6                    F   15:30 16:40                               
+                                                                                
+                                                                                
+                                                                                
+
+SQL> update timetable set workleft='&workleft' where day='&day'and class='&class' and section='&section'and starttime='&starttime'and endtime='&endtime';
+Enter value for workleft: Lesson-2
+Enter value for day: Monday
+Enter value for class: 8
+Enter value for section: B
+Enter value for starttime: 8:30
+Enter value for endtime: 10:20
+old   1: update timetable set workleft='&workleft' where day='&day'and class='&class' and section='&section'and starttime='&starttime'and endtime='&endtime'
+new   1: update timetable set workleft='Lesson-2' where day='Monday'and class='8' and section='B'and starttime='8:30'and endtime='10:20'
+
+1 row updated.
+
+SQL> select * from timetable;
+
+DAY          CLASS                SEC START ENDTI                               
+------------ -------------------- --- ----- -----                               
+WORKTOBEDONE                                                                    
+--------------------------------------------------------------------------------
+WORKLEFT                                                                        
+--------------------------------------------------------------------------------
+Monday       8                    B   8:30  10:20                               
+Revision                                                                        
+Lesson-2                                                                        
+                                                                                
+Tuesday      3                    D   12:23 13:32                               
+                                                                                
+                                                                                
+
+DAY          CLASS                SEC START ENDTI                               
+------------ -------------------- --- ----- -----                               
+WORKTOBEDONE                                                                    
+--------------------------------------------------------------------------------
+WORKLEFT                                                                        
+--------------------------------------------------------------------------------
+                                                                                
+Monday       6                    F   15:30 16:40                               
+                                                                                
+                                                                                
+                                                                                
+
+SQL> update timetable set worktobedone='&worktobedone' where day='&day'and class='&class' and section='&section'and starttime='&starttime'and endtime='&endtime';
+Enter value for worktobedone: Complete till lesson-3
+Enter value for day: monday
+Enter value for class: 8
+Enter value for section: B
+Enter value for starttime: 8:30
+Enter value for endtime: 10:20
+old   1: update timetable set worktobedone='&worktobedone' where day='&day'and class='&class' and section='&section'and starttime='&starttime'and endtime='&endtime'
+new   1: update timetable set worktobedone='Complete till lesson-3' where day='monday'and class='8' and section='B'and starttime='8:30'and endtime='10:20'
+
+0 rows updated.
+
+SQL> /
+Enter value for worktobedone: Complete till lesson-3
+Enter value for day: Monday
+Enter value for class: 8
+Enter value for section: B
+Enter value for starttime: 8:30
+Enter value for endtime: 10:20
+old   1: update timetable set worktobedone='&worktobedone' where day='&day'and class='&class' and section='&section'and starttime='&starttime'and endtime='&endtime'
+new   1: update timetable set worktobedone='Complete till lesson-3' where day='Monday'and class='8' and section='B'and starttime='8:30'and endtime='10:20'
+
+1 row updated.
+
+SQL> delete from timetable where class='&class' and section='&section'and starttime='&starttime' and endtime='&endtime';
+Enter value for class: 8
+Enter value for section: B
+Enter value for starttime: 8:30
+Enter value for endtime: 10:20
+old   1: delete from timetable where class='&class' and section='&section'and starttime='&starttime' and endtime='&endtime'
+new   1: delete from timetable where class='8' and section='B'and starttime='8:30' and endtime='10:20'
+
+1 row deleted.
+
+SQL> select * from timetable;
+
+DAY          CLASS                SEC START ENDTI                               
+------------ -------------------- --- ----- -----                               
+WORKTOBEDONE                                                                    
+--------------------------------------------------------------------------------
+WORKLEFT                                                                        
+--------------------------------------------------------------------------------
+Tuesday      3                    D   12:23 13:32                               
+                                                                                
+                                                                                
+                                                                                
+Monday       6                    F   15:30 16:40                               
+                                                                                
+                                                                                
+
+DAY          CLASS                SEC START ENDTI                               
+------------ -------------------- --- ----- -----                               
+WORKTOBEDONE                                                                    
+--------------------------------------------------------------------------------
+WORKLEFT                                                                        
+--------------------------------------------------------------------------------
+                                                                                
+
+SQL> commit;
+
+Commit complete.
+
+SQL> update timetable set worktobedone='&worktobedone' where day='&day'and class='&class' and section='&section'and starttime='&starttime'and endtime='&endtime';
+Enter value for worktobedone: Complete all lessons
+Enter value for day: monday
+Enter value for class: 6
+Enter value for section: F
+Enter value for starttime: 15:30
+Enter value for endtime: 16:40
+old   1: update timetable set worktobedone='&worktobedone' where day='&day'and class='&class' and section='&section'and starttime='&starttime'and endtime='&endtime'
+new   1: update timetable set worktobedone='Complete all lessons' where day='monday'and class='6' and section='F'and starttime='15:30'and endtime='16:40'
+
+0 rows updated.
+
+SQL> /
+Enter value for worktobedone: Complete all lessons
+Enter value for day: Monday
+Enter value for class: 6
+Enter value for section: F
+Enter value for starttime: 15:30
+Enter value for endtime: 16:40
+old   1: update timetable set worktobedone='&worktobedone' where day='&day'and class='&class' and section='&section'and starttime='&starttime'and endtime='&endtime'
+new   1: update timetable set worktobedone='Complete all lessons' where day='Monday'and class='6' and section='F'and starttime='15:30'and endtime='16:40'
+
+1 row updated.
+
+SQL> commit
+  2  ;
+
+Commit complete.
+
+SQL> spool off
